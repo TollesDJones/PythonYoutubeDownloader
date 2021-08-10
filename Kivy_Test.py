@@ -1,11 +1,15 @@
 from kivy import lang
+from kivy.core.window import Window
 from kivymd.app import MDApp
 from kivymd.uix import screen
+from kivymd.uix import dialog
 from kivymd.uix.label import MDLabel, MDIcon
 from kivymd.uix.screen import Screen
 from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton, MDRectangleFlatIconButton
 from kivymd.uix.textfield import MDTextField
+from kivymd.uix.dialog import MDDialog
 from kivy.lang import Builder
+from kivy.core.window import Window
 from pytube import YouTube
 import pytube
 from pytube.helpers import regex_search
@@ -29,6 +33,8 @@ import Kivy_Test_Helpers as kh
 
 class DemoApp(MDApp):
     def build(self):
+        Window.size = (450, 600)
+        self.title = 'YouTube Video Downloader'
         self.theme_cls.primary_palette = 'Red'
         self.theme_cls.primary_hue = 'A700'
         self.theme_cls.theme_style = 'Dark'
@@ -41,7 +47,9 @@ class DemoApp(MDApp):
         return screen
 
     def show_data(self, obj):
-        print(self.txt_ent_youtube_link.text)
+        #print(self.txt_ent_youtube_link.text)
+        btn_close_dialog = MDFlatButton(text= 'Close', on_release= self.close_dialog)
+        self.dialog = MDDialog(title='Status', text='Download Completed!', size_hint=(1, 1), buttons=[btn_close_dialog])
         link = self.txt_ent_youtube_link.text
         yt= YouTube(link)
         run = True
@@ -54,7 +62,10 @@ class DemoApp(MDApp):
                 print('Invalid link, Please try again.')
               
         self.txt_ent_youtube_link.text = ''
-
+        self.dialog.open()
+        
+    def close_dialog(self, obj):
+        self.dialog.dismiss()
 
 DemoApp().run()
 
