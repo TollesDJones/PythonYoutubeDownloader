@@ -6,6 +6,9 @@ from kivymd.uix.screen import Screen
 from kivymd.uix.button import MDFlatButton, MDRectangleFlatButton, MDRectangleFlatIconButton
 from kivymd.uix.textfield import MDTextField
 from kivy.lang import Builder
+from pytube import YouTube
+import pytube
+from pytube.helpers import regex_search
 import Kivy_Test_Helpers as kh
 
 # This code can be moved to a module file within the same drectory 
@@ -39,6 +42,18 @@ class DemoApp(MDApp):
 
     def show_data(self, obj):
         print(self.txt_ent_youtube_link.text)
+        link = self.txt_ent_youtube_link.text
+        yt= YouTube(link)
+        run = True
+        while run:
+            try:
+                yt.streams.get_highest_resolution().download(output_path='./downloads')
+                run = False
+                break
+            except:
+                print('Invalid link, Please try again.')
+              
+        self.txt_ent_youtube_link.text = ''
 
 
 DemoApp().run()
