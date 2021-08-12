@@ -57,8 +57,7 @@ class DemoApp(MDApp):
             try:
                 yt.streams.get_highest_resolution().download(output_path='./downloads')
                 run = False
-                break
-            except:
+            except pytube.exceptions.PytubeError as e:
                 print('Invalid link, Please try again.')
               
         self.txt_ent_youtube_link.text = ''
@@ -67,7 +66,9 @@ class DemoApp(MDApp):
     def close_dialog(self, obj):
         self.dialog.dismiss()
 
-DemoApp().run()
+
+if __name__ == "__main__":
+    DemoApp().run()
 
 
 

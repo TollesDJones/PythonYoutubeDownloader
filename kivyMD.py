@@ -19,7 +19,7 @@ FloatLayout:
 
 class MyApp(App):
     def build (self):
-        Window.size = [300, 600]
+        Window.size = [360, 600]
         return Builder.load_string(KV)
 
 
