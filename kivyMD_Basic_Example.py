@@ -14,7 +14,7 @@ FloatLayout:
         text: "youtube downloader".title()
         size_hint: [None, None]
         size: self.texture_size
-        pos_hint: {"top:0.9, "center_x:0.5}
+        pos_hint: {"top":0.9, "center_x":0.5}
 """
 
 class MyApp(App):
